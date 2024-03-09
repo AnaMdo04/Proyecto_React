@@ -171,9 +171,6 @@ function useGameLogic() {
           }
         }
         break;
-      case "prohibido":
-        cambiarTurno();
-        break;
       default:
         cambiarTurno();
         break;
