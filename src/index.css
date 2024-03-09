@@ -1,4 +1,3 @@
-/* Estilo base para el contenedor de las cartas */
 .mano {
   display: flex;
   flex-wrap: wrap;
@@ -6,7 +5,13 @@
   justify-content: center;
 }
 
-/* Estilos generales para cada carta */
+body {
+  background-image: url("./img/fondoJuego.jpeg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
 .carta {
   height: 200px;
   width: 150px;
@@ -201,4 +206,132 @@
   height: 100%;
   background-color: white;
   box-shadow: 1px 1px 1px #000;
+}
+
+.fade-in {
+  animation: fadeInAnimation ease 1s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadeInAnimation {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.modal-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.color-options button {
+  margin: 10px;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  color: white;
+  font-weight: bold;
+}
+
+.carta-robar {
+  height: 200px;
+  width: 150px;
+  border-radius: 10px;
+  border: 3px solid white;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-family: "Arial", sans-serif;
+  transition: transform 0.3s ease;
+  background-color: rgba(58, 56, 58, 255);
+}
+
+.carta-robar:hover {
+  background-color: rgb(48, 45, 47);
+}
+
+.carta-robar .uno-card-middle-circle {
+  background-color: rgb(243, 76, 68);
+  width: 100px;
+  height: 205px;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(40deg);
+}
+
+.carta-robar .uno-card-middle-circle-text {
+  color: #f3dc50;
+  font-size: 70px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-40deg);
+  text-shadow: 2px 2px 2px #000;
+}
+
+.presentacion-container {
+  background-image: url("./img/fondoInicio.webp");
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+.start-button {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-top: 20px;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.instructions-button {
+  background-color: #008cba;
+  color: white;
+  border: none;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-top: 20px;
+  cursor: pointer;
+  border-radius: 50%;
 }

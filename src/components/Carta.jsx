@@ -1,6 +1,6 @@
 import React from "react";
 
-const Carta = ({ carta, onClick }) => {
+const Carta = React.memo(({ carta, onClick }) => {
   const { color, valor } = carta;
   const estilo = {
     backgroundColor: color,
@@ -8,10 +8,10 @@ const Carta = ({ carta, onClick }) => {
   };
 
   return (
-    <div className="carta" style={estilo} onClick={onClick}>
+    <div className="carta fade-in" style={estilo} onClick={onClick}>
       {valor}
     </div>
   );
-};
+});
 
 export default Carta;
