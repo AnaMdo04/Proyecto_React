@@ -98,11 +98,10 @@ function Juego() {
             <h2>Cartas Especiales Efectos </h2>
             <h3>Cambio de color </h3>
             <p>Permite al jugador cambiar el color de la carta superior de la pila de descarte.</p>
-            <h3> Roba 2 </h3>
-            <p>
-              Hace que el siguiente jugador robe 2 cartas y pierda su turno. Salto: Salta al siguiente jugador, haciendo
-              que pierda su turno.
-            </p>
+            <h3>Roba 2</h3>
+            <p>Hace que el siguiente jugador robe 2 cartas y pierda su turno. </p>
+            <h3>Salto</h3>
+            <p>Salta al siguiente jugador, haciendo que pierda su turno.</p>
             <h3>Comodín Roba 4 </h3>
             <p>
               Permite al jugador cambiar el color de la carta superior de la pila de descarte y obliga al siguiente
