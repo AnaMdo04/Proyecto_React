@@ -12,6 +12,12 @@ body {
   background-position: center;
 }
 
+body,
+button,
+a {
+  cursor: url("./img/cursor.png"), auto;
+}
+
 .carta {
   height: 150px;
   width: 100px;
@@ -19,7 +25,6 @@ body {
   border: 3px solid white;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
   position: relative;
-  cursor: pointer;
   overflow: hidden;
   display: flex;
   justify-content: center;
@@ -235,20 +240,10 @@ body {
   align-items: center;
 }
 
-.modal-content {
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
 .color-options button {
   margin: 10px;
   padding: 10px;
   border: none;
-  cursor: pointer;
   color: white;
   font-weight: bold;
 }
@@ -260,7 +255,6 @@ body {
   border: 3px solid white;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
   position: relative;
-  cursor: pointer;
   overflow: hidden;
   display: flex;
   justify-content: center;
@@ -317,11 +311,46 @@ body {
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  margin-top: 20px;
-  cursor: pointer;
+  margin-top: 450px;
   border-radius: 8px;
 }
+.start-button:hover {
+  background-color: rgb(23, 62, 45);
+}
+/* Estilos para el modal de instrucciones */
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+}
 
+.modal-content {
+  background: #ecd8b3;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center; /* Centra el contenido */
+  font-size: 24px; /* Tamaño del texto */
+  position: absolute;
+  top: 50%; /* Alinea el contenido al centro verticalmente */
+  left: 50%; /* Alinea el contenido al centro horizontalmente */
+  transform: translate(-50%, -50%); /* Centra el contenido */
+  color: black; /* Color del texto */
+  background-color: rgba(235, 196, 158, 0.9);
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+/* Estilos para el botón de instrucciones */
 .instructions-button {
   background-color: #008cba;
   color: white;
@@ -331,10 +360,17 @@ body {
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  margin-top: 20px;
-  cursor: pointer;
+  position: absolute;
+  top: 20px; /* Ajusta la distancia desde la parte superior */
+  right: 20px; /* Ajusta la distancia desde el borde derecho */
   border-radius: 50%;
 }
+
+.instructions-button:hover {
+  background-color: #065a76;
+}
+
+/* Tus estilos adicionales van aquí */
 
 .pila-descarte {
   display: flex;
@@ -345,4 +381,26 @@ body {
 
 .carta-robar {
   margin: 0 10px;
+}
+
+.scrollable-content {
+  max-height: 300px; /* Altura máxima del área de desplazamiento */
+  overflow-y: auto; /* Mostrar barra de desplazamiento vertical cuando sea necesario */
+  padding-right: 20px; /* Añadir espacio para la barra de desplazamiento */
+}
+
+.scrollable-content::-webkit-scrollbar {
+  width: 10px; /* Ancho de la barra de desplazamiento */
+}
+
+.scrollable-content::-webkit-scrollbar-track {
+  background: rgb(163, 119, 99); /* Color de fondo de la barra de desplazamiento */
+}
+
+.scrollable-content::-webkit-scrollbar-thumb {
+  background: #634b3b; /* Color del "pulgar" de la barra de desplazamiento */
+}
+
+.scrollable-content::-webkit-scrollbar-thumb:hover {
+  background: #3b2d23; /* Cambiar color del "pulgar" al pasar el ratón */
 }
