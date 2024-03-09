@@ -42,9 +42,13 @@ function Juego() {
 
   const renderPilaDescarte = () => {
     return pilaDescarte.length > 0 ? (
-      <div>
-        <Mano cartas={[pilaDescarte[pilaDescarte.length - 1]]} alJugarCarta={() => {}} />
-        <CartaRobar onClick={() => robarCartas(1, "jugador")} jugable={robarCartaVisible} />
+      <div className="pila-descarte">
+        <div className="carta-robar-container">
+          <CartaRobar onClick={() => robarCartas(1, "jugador")} jugable={robarCartaVisible} />
+        </div>
+        <div className="mano-computadora-container">
+          <Mano cartas={[pilaDescarte[pilaDescarte.length - 1]]} alJugarCarta={() => {}} />
+        </div>
       </div>
     ) : null;
   };
@@ -63,32 +67,36 @@ function Juego() {
     );
 
   return (
-    <div className="App">
-      {juegoTerminado ? (
-        <>
-          <h2>Juego Terminado. ¡{turno} gana!</h2>
-          <button onClick={inicializarJuego}>Reiniciar Juego</button>
-        </>
-      ) : (
-        <>
-          <div>
-            <h2></h2>
-            <Mano cartas={manoComputadora} />
-          </div>
-          <h2></h2>
-          {renderPilaDescarte()}
-          {turno === "jugador" && (
-            <>
+    <div className="center-container">
+      <div className="App">
+        {juegoTerminado ? (
+          <>
+            <h2>Juego Terminado. ¡{turno} gana!</h2>
+            <button onClick={inicializarJuego}>Reiniciar Juego</button>
+          </>
+        ) : (
+          <>
+            <div className="mano-computadora-container">
               <h2></h2>
-              {renderManoJugador()}
-              {robarCartaVisible && !jugadorDijoUno && (
-                <button onClick={() => setJugadorDijoUno(true)}>Decir UNO</button>
-              )}
-            </>
-          )}
-          <ModalSelectorColor seleccionarColor={seleccionarColor} />
-        </>
-      )}
+              {renderManoComputadora()}
+            </div>
+            <h2></h2>
+            {renderPilaDescarte()}
+            {turno === "jugador" && (
+              <>
+                <h2></h2>
+                <div className="mano-jugador-container">
+                  {renderManoJugador()}
+                  {robarCartaVisible && !jugadorDijoUno && (
+                    <button onClick={() => setJugadorDijoUno(true)}>Decir UNO</button>
+                  )}
+                </div>
+              </>
+            )}
+            <ModalSelectorColor seleccionarColor={seleccionarColor} />
+          </>
+        )}
+      </div>
     </div>
   );
 }
