@@ -2,7 +2,7 @@ import React from "react";
 
 function Mano({ cartas, alJugarCarta }) {
   const determinarClaseEspecial = (carta) => {
-    if (["+2", "reversa", "salta", "comodin", "+4"].includes(carta.valor)) {
+    if (["+2", "reversa", "prohibido", "comodin", "+4"].includes(carta.valor)) {
       return "especial";
     }
     return "";
@@ -18,14 +18,14 @@ function Mano({ cartas, alJugarCarta }) {
         >
           {!["comodin"].includes(carta.valor) && (
             <React.Fragment>
-              <div className="uno-card-small-number">{carta.valor !== "salta" ? carta.valor : ""}</div>
+              <div className="uno-card-small-number">{carta.valor !== "prohibido" ? carta.valor : ""}</div>
               <div className="uno-card-small-number uno-card-small-number-bottom-right">
-                {carta.valor !== "salta" ? carta.valor : ""}
+                {carta.valor !== "prohibido" ? carta.valor : ""}
               </div>
             </React.Fragment>
           )}
           <div className="uno-card-middle-circle">
-            {carta.valor === "salta" ? (
+            {carta.valor === "prohibido" ? (
               <React.Fragment>
                 <div className="uno-card-prohibido"></div>
                 <div className="uno-card-prohibido uno-card-prohibido-top-left"></div>
