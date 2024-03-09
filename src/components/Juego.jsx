@@ -81,11 +81,12 @@ function Juego() {
           <h1>Instrucciones</h1>
           <div className="scrollable-content">
             <h2>Objetivo</h2>
+            <p>El objetivo principal del juego es ser el primer jugador en quedarse sin cartas en la mano.</p>
+            <h2>Preparación</h2>
             <p>
-              El objetivo principal del juego es ser el primer jugador en quedarse sin cartas en la mano. Preparación:
-              El juego puede ser jugado por 2 a 10 jugadores. Se reparten 7 cartas a cada jugador. Las cartas restantes
-              se colocan boca abajo para formar el mazo de robar. La primera carta del mazo se coloca boca arriba al
-              lado del mazo para comenzar la pila de descarte.
+              El juego es de 2 jugadores. Se reparten 7 cartas a cada jugador. Las cartas restantes se colocan boca
+              abajo para formar el mazo de robar. La primera carta del mazo se coloca boca arriba al lado del mazo para
+              comenzar la pila de descarte.
             </p>
             <h2>Desarrollo</h2>
             <p>
