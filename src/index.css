@@ -338,11 +338,11 @@ body {
 
 .pila-descarte {
   display: flex;
-  justify-content: center; /* Centra horizontalmente las cartas */
+  justify-content: center;
   align-items: center;
-  width: 100%; /* Utiliza todo el ancho disponible */
+  width: 100%;
 }
 
 .carta-robar {
-  margin: 0 10px; /* Ajusta el margen entre las cartas */
+  margin: 0 10px;
 }
