@@ -12,8 +12,7 @@ function CartaRobar({ onClick, jugable }) {
     </div>
   );
 }
-
-function Juego() {
+function Juego({ playVictorySound, playDefeatSound }) {
   const {
     manoJugador,
     manoComputadora,
@@ -38,6 +37,16 @@ function Juego() {
     const jugable = !manoJugador.some((carta) => esCartaJugable(carta));
     setRobarCartaVisible(jugable);
   }, [manoJugador, esCartaJugable]);
+
+  useEffect(() => {
+    if (juegoTerminado) {
+      if (ganador === "jugador") {
+        playVictorySound();
+      } else {
+        playDefeatSound();
+      }
+    }
+  }, [juegoTerminado, ganador, playVictorySound, playDefeatSound]);
 
   const toggleInstrucciones = () => {
     setMostrarModalInstrucciones(!mostrarModalInstrucciones);

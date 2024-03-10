@@ -5,14 +5,19 @@ import musicaFondo from "./img/musicaFondo.mp3";
 import volumenOn from "./img/activadoVolumen.png";
 import volumenOff from "./img/desactivadoVolumen.png";
 import clickSound from "./img/clickSound.mp3";
+import victorySound from "./img/VictorySound.mp3";
+import defeatSound from "./img/DefeatSound.mp3";
 import "./index.css";
 
 function App() {
   const [mostrarJuego, setMostrarJuego] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef(new Audio(musicaFondo));
-  audioRef.current.volume = 0.1;
   const clickSoundAudio = useRef(new Audio(clickSound));
+  const victorySoundAudio = useRef(new Audio(victorySound));
+  const defeatSoundAudio = useRef(new Audio(defeatSound));
+
+  audioRef.current.volume = 0.1;
 
   useEffect(() => {
     if (isPlaying) {
@@ -31,10 +36,21 @@ function App() {
     document.addEventListener("click", playClickSound);
 
     return () => {
-      audioRef.current.pause();
       document.removeEventListener("click", playClickSound);
     };
   }, [isPlaying]);
+
+  const playVictorySound = () => {
+    if (isPlaying) {
+      victorySoundAudio.current.play();
+    }
+  };
+
+  const playDefeatSound = () => {
+    if (isPlaying) {
+      defeatSoundAudio.current.play();
+    }
+  };
 
   const iniciarJuego = () => {
     setMostrarJuego(true);
@@ -51,7 +67,11 @@ function App() {
           <img src={isPlaying ? volumenOn : volumenOff} alt="Control de volumen" />
         </button>
       </div>
-      {mostrarJuego ? <Juego /> : <Presentacion iniciarJuego={iniciarJuego} />}
+      {mostrarJuego ? (
+        <Juego playVictorySound={playVictorySound} playDefeatSound={playDefeatSound} />
+      ) : (
+        <Presentacion iniciarJuego={iniciarJuego} />
+      )}
     </div>
   );
 }
