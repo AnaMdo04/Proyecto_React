@@ -12,6 +12,7 @@ function CartaRobar({ onClick, jugable }) {
     </div>
   );
 }
+
 function Juego({ playVictorySound, playDefeatSound }) {
   const {
     manoJugador,
@@ -149,8 +150,9 @@ function Juego({ playVictorySound, playDefeatSound }) {
         ) : (
           <>
             <div className="mano-computadora-container">
-              {colorActual && <h1 style={{ color: colorActual }}>Color Actual: {colorActual.toUpperCase()}</h1>}
-              <h2></h2>
+              <div className={`color-actual-indicator ${colorActual}`}>
+                <h1>{colorActual.toUpperCase()}</h1>
+              </div>
               {renderManoComputadora()}
             </div>
             <h2></h2>
