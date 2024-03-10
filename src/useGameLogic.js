@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useImperativeHandle } from "react";
 
 function useGameLogic() {
   const [mazo, setMazo] = useState([]);
@@ -6,8 +6,8 @@ function useGameLogic() {
   const [manoComputadora, setManoComputadora] = useState([]);
   const [pilaDescarte, setPilaDescarte] = useState([]);
   const [turno, setTurno] = useState("jugador");
+  const [carta, setCarta] = useState(null);
   const [saltoDeTurno, setSaltoDeTurno] = useState(false);
-  const [direccionJuego, setDireccionJuego] = useState(1);
   const [colorActual, setColorActual] = useState("");
   const [mostrarModalSelectorColor, setMostrarModalSelectorColor] = useState(false);
   const [juegoTerminado, setJuegoTerminado] = useState(false);
@@ -75,7 +75,7 @@ function useGameLogic() {
         setSaltoDeTurno(false); // Desactiva el salto de turno
         cambiarTurno(); // Cambia al siguiente turno
       } else {
-        // La lógica existente para que la computadora juegue su turno
+        // La lÃ³gica existente para que la computadora juegue su turno
         const cartaJugada = manoComputadora.find((carta) => esCartaJugable(carta));
         if (cartaJugada) {
           jugarCarta(cartaJugada, "computadora");
@@ -90,9 +90,13 @@ function useGameLogic() {
     jugarTurnoComputadora();
   }, [manoComputadora, turno]);
 
-  const seleccionarColor = (color) => {
-    setColorActual(color);
+  const seleccionarColor = (carta, color) => {
     setMostrarModalSelectorColor(false);
+    setColorActual(color);
+    if (carta.valor === "+4") {
+      robarCartas(4, turno === "jugador" ? "computadora" : "jugador");
+    }
+
     if (!juegoTerminado) {
       cambiarTurno();
     }
@@ -104,6 +108,7 @@ function useGameLogic() {
       const nuevaPilaDescarte = [...pilaDescarte, carta];
       setPilaDescarte(nuevaPilaDescarte);
       setColorActual(carta.color);
+      setCarta(carta);
 
       if (jugador === "jugador") {
         const nuevaMano = manoJugador.filter((c) => c !== carta);
@@ -115,7 +120,6 @@ function useGameLogic() {
         verificarFinJuego(nuevaMano, "computadora");
       }
       aplicarEfectoCarta(carta);
-      cambiarTurno();
     }
   };
 
@@ -128,7 +132,6 @@ function useGameLogic() {
     } else {
       setManoComputadora([...manoComputadora, ...cartasRobadas]);
     }
-
     cambiarTurno();
   };
 
@@ -171,11 +174,13 @@ function useGameLogic() {
           );
           const colorElegido = coloresEnManoComputadora[Math.floor(Math.random() * coloresEnManoComputadora.length)];
           setColorActual(colorElegido);
-          if (carta.valor !== "+4") {
+          if (carta.valor === "+4") {
             robarCartas(4, turno === "jugador" ? "computadora" : "jugador");
           }
         } else {
-          setMostrarModalSelectorColor(true);
+          if (carta.valor === "+4" || carta.valor === "comodin") {
+            setMostrarModalSelectorColor(true);
+          }
         }
         break;
       default:
@@ -190,12 +195,12 @@ function useGameLogic() {
     manoComputadora,
     pilaDescarte,
     turno,
-    direccionJuego,
     colorActual,
     mostrarModalSelectorColor,
     juegoTerminado,
     jugadorDijoUno,
     computadoraDijoUno,
+    carta,
     inicializarJuego,
     jugarCarta,
     esCartaJugable,
