@@ -86,7 +86,7 @@ function Juego({ playVictorySound, playDefeatSound }) {
       <div className="modal-selector-color">
         <div className="contenido-selector-color">
           {["rojo", "amarillo", "verde", "azul"].map((color) => (
-            <button key={color} className={color} onClick={() => seleccionarColor(color, carta)}>
+            <button key={color} className={color} onClick={() => seleccionarColor(color)}>
               {color.toUpperCase()}
             </button>
           ))}
@@ -157,9 +157,7 @@ function Juego({ playVictorySound, playDefeatSound }) {
         ) : (
           <>
             <div className="mano-computadora-container">
-              <div className={`color-actual-indicator ${colorActual}`}>
-                <h1>{colorActual.toUpperCase()}</h1>
-              </div>
+              <h2></h2>
               {renderManoComputadora()}
             </div>
             <h2></h2>
