@@ -40,7 +40,11 @@ function Mano({ cartas, alJugarCarta }) {
             ) : carta.valor === "comodin" ? (
               <div className="uno-card-comodin-simbolo"></div>
             ) : carta.valor === "reversa" ? (
-              <div className="uno-card-reversa-simbolo"></div> // Cambiado para usar CSS en lugar de SVG
+              <React.Fragment>
+                <div className="uno-card-reversa-simbolo">
+                  <span className="uno-card-simbolo-menor"></span>
+                </div>
+              </React.Fragment>
             ) : (
               <div className="uno-card-middle-circle-number">{carta.valor}</div>
             )}

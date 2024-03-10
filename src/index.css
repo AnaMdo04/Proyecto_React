@@ -536,40 +536,63 @@ button.azul:hover {
 
 .uno-card-reversa-simbolo {
   position: relative;
-  width: 40px;
+  width: 80px;
   height: 40px;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  border: 8px solid currentColor;
-  border-radius: 50%;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   z-index: 2;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
 }
 
 .uno-card-reversa-simbolo::before,
 .uno-card-reversa-simbolo::after {
   content: "";
   position: absolute;
-  width: 10px;
-  height: 10px;
-  border-right: 5px solid currentColor;
-  border-top: 5px solid currentColor;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
-  z-index: 3;
+  width: 40px;
+  height: 40px;
+  border: 8px solid currentColor;
+  border-radius: 50%;
 }
 
 .uno-card-reversa-simbolo::before {
-  transform: rotate(-100deg);
-  right: -4px;
-  top: -4px;
+  left: 7px;
+  top: -12px;
+  border-color: currentColor transparent transparent currentColor;
+  transform: rotate(-40deg);
 }
 
 .uno-card-reversa-simbolo::after {
-  transform: rotate(100deg);
-  left: -4px;
-  bottom: -4px;
+  right: 7px;
+  top: -10px;
+  border-color: currentColor currentColor transparent transparent;
+  transform: rotate(50deg);
+}
+
+.uno-card-simbolo-menor {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  color: currentColor;
+  font-size: 40px;
+  z-index: 3;
+}
+
+.uno-card-simbolo-menor::before,
+.uno-card-simbolo-menor::after {
+  content: "<";
+  position: absolute;
+}
+
+.uno-card-simbolo-menor::before {
+  left: 17px;
+  top: -5px;
+  transform: rotate(-155deg);
+}
+
+.uno-card-simbolo-menor::after {
+  right: -62.5px;
+  bottom: 1.5px;
+  transform: rotate(20deg);
 }
