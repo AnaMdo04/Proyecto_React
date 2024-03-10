@@ -12,6 +12,7 @@ function CartaRobar({ onClick, jugable }) {
     </div>
   );
 }
+
 function Juego({ playVictorySound, playDefeatSound }) {
   const {
     manoJugador,
@@ -54,9 +55,13 @@ function Juego({ playVictorySound, playDefeatSound }) {
     setMostrarModalInstrucciones(!mostrarModalInstrucciones);
   };
 
-  const renderManoJugador = () => <Mano cartas={manoJugador} alJugarCarta={(carta) => jugarCarta(carta, "jugador")} />;
+  const renderManoJugador = (colorActual) => (
+    <Mano cartas={manoJugador} alJugarCarta={(carta) => jugarCarta(carta, "jugador")} jugador="jugador" tipo="mano" />
+  );
 
-  const renderManoComputadora = () => <Mano cartas={manoComputadora} alJugarCarta={() => {}} />;
+  const renderManoComputadora = () => (
+    <Mano cartas={manoComputadora} alJugarCarta={() => {}} jugador="computadora" tipo="mano" />
+  );
 
   const renderPilaDescarte = () => {
     return pilaDescarte.length > 0 ? (
@@ -65,7 +70,12 @@ function Juego({ playVictorySound, playDefeatSound }) {
           <CartaRobar onClick={() => robarCartas(1, "jugador")} jugable={robarCartaVisible} />
         </div>
         <div className="mano-computadora-container">
-          <Mano cartas={[pilaDescarte[pilaDescarte.length - 1]]} alJugarCarta={() => {}} />
+          <Mano
+            cartas={[pilaDescarte[pilaDescarte.length - 1]]}
+            alJugarCarta={() => {}}
+            jugador="computadora"
+            tipo="pila-descarte"
+          />
         </div>
       </div>
     ) : null;
@@ -147,9 +157,9 @@ function Juego({ playVictorySound, playDefeatSound }) {
         ) : (
           <>
             <div className="mano-computadora-container">
-              {colorActual && <h1>{colorActual}</h1>}
-
-              <h2></h2>
+              <div className={`color-actual-indicator ${colorActual}`}>
+                <h1>{colorActual.toUpperCase()}</h1>
+              </div>
               {renderManoComputadora()}
             </div>
             <h2></h2>
@@ -158,7 +168,7 @@ function Juego({ playVictorySound, playDefeatSound }) {
               <>
                 <h2></h2>
                 <div className="mano-jugador-container">
-                  {renderManoJugador()}
+                  {renderManoJugador(colorActual)}
                   {robarCartaVisible && !jugadorDijoUno && (
                     <img
                       src={imagenDecirUno}
