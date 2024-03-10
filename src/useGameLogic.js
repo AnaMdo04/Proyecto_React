@@ -15,7 +15,7 @@ function useGameLogic() {
 
   const generarMazo = () => {
     const colores = ["rojo", "amarillo", "verde", "azul"];
-    const valores = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "salta", "reversa", "+2"];
+    const valores = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "prohibido", "reversa", "+2"];
     const cartasEspeciales = ["comodin", "+4"];
     let mazo = [];
 
@@ -144,7 +144,7 @@ function useGameLogic() {
 
   const aplicarEfectoCarta = (carta) => {
     switch (carta.valor) {
-      case "salta":
+      case "prohibido":
         cambiarTurno();
         break;
       case "reversa":
