@@ -101,6 +101,9 @@ function useGameLogic() {
       cambiarTurno();
     }
   };
+  const handleDecirUno = () => {
+    setJugadorDijoUno(true);
+  };
 
   const jugarCarta = (carta, jugador) => {
     if (juegoTerminado) return;
@@ -127,6 +130,14 @@ function useGameLogic() {
         const nuevaMano = manoComputadora.filter((c) => c !== carta);
         setManoComputadora(nuevaMano);
         verificarFinJuego(nuevaMano, "computadora");
+        if (nuevaMano.length === 1 && !computadoraDijoUno) {
+          // Penalizar al jugador por no decir "UNO" antes de jugar su última carta
+          robarCartas(2, "computadora");
+          // Reiniciar el estado de "UNO" para el jugador
+          setComputadoraDijoUno(false);
+          // Salir de la función para evitar que el turno cambie
+          return;
+        }
       }
       aplicarEfectoCarta(carta);
     }

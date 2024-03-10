@@ -6,7 +6,7 @@ import imagenDecirUno from "../img/logo.png";
 
 function CartaRobar({ onClick, jugable }) {
   return (
-    <div className={`carta-robar ${jugable ? "jugable" : ""}`} onClick={jugable ? onClick : null}>
+    <div className={`carta-robar ${jugable ? "jugable" : ""}`} onClick={onClick}>
       <div className="uno-card-middle-circle"></div>
       <div className="uno-card-middle-circle-text">UNO</div>
     </div>
@@ -35,11 +35,17 @@ function Juego({ playVictorySound, playDefeatSound }) {
 
   const [robarCartaVisible, setRobarCartaVisible] = useState(false);
   const [mostrarModalInstrucciones, setMostrarModalInstrucciones] = useState(false);
+  const [jugadorPenalizado, setJugadorPenalizado] = useState(false);
 
   useEffect(() => {
     const jugable = !manoJugador.some((carta) => esCartaJugable(carta));
     setRobarCartaVisible(jugable);
-  }, [manoJugador, esCartaJugable]);
+    if (manoJugador.length === 2 && !jugadorDijoUno) {
+      setJugadorPenalizado(true);
+    } else {
+      setJugadorPenalizado(false);
+    }
+  }, [manoJugador, esCartaJugable, jugadorDijoUno]);
 
   useEffect(() => {
     if (juegoTerminado) {
@@ -79,6 +85,17 @@ function Juego({ playVictorySound, playDefeatSound }) {
         </div>
       </div>
     ) : null;
+  };
+  const handleDecirUno = () => {
+    setJugadorDijoUno(true);
+    mostrarAlertaDecirUno();
+  };
+  const mostrarAlertaDecirUno = () => {
+    if (jugadorDijoUno) {
+      alert("¡Has dicho UNO!");
+    } else {
+      alert("No necesitas decir UNO en este momento.");
+    }
   };
 
   const ModalSelectorColor = ({ seleccionarColor, carta }) =>
@@ -169,14 +186,13 @@ function Juego({ playVictorySound, playDefeatSound }) {
                 <h2></h2>
                 <div className="mano-jugador-container">
                   {renderManoJugador(colorActual)}
-                  {robarCartaVisible && !jugadorDijoUno && (
-                    <img
-                      src={imagenDecirUno}
-                      alt="Decir UNO"
-                      className="imagen-decir-uno"
-                      onClick={() => setJugadorDijoUno(true)}
-                    />
-                  )}
+                  <img
+                    src={imagenDecirUno}
+                    alt="Decir UNO"
+                    className="imagen-decir-uno"
+                    onClick={() => handleDecirUno()}
+                  />
+                  {jugadorPenalizado}
                 </div>
               </>
             )}
