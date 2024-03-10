@@ -18,6 +18,8 @@ function Juego({ playVictorySound, playDefeatSound }) {
     manoComputadora,
     pilaDescarte,
     turno,
+    colorActual,
+    carta,
     mostrarModalSelectorColor,
     juegoTerminado,
     jugadorDijoUno,
@@ -52,7 +54,9 @@ function Juego({ playVictorySound, playDefeatSound }) {
     setMostrarModalInstrucciones(!mostrarModalInstrucciones);
   };
 
-  const renderManoJugador = () => <Mano cartas={manoJugador} alJugarCarta={(carta) => jugarCarta(carta, "jugador")} />;
+  const renderManoJugador = (colorActual) => (
+    <Mano cartas={manoJugador} alJugarCarta={(carta) => jugarCarta(carta, "jugador")} colorActual={colorActual} />
+  );
 
   const renderManoComputadora = () => <Mano cartas={manoComputadora} alJugarCarta={() => {}} />;
 
@@ -69,12 +73,12 @@ function Juego({ playVictorySound, playDefeatSound }) {
     ) : null;
   };
 
-  const ModalSelectorColor = ({ seleccionarColor }) =>
+  const ModalSelectorColor = ({ seleccionarColor, carta }) =>
     mostrarModalSelectorColor && (
       <div className="modal-selector-color">
         <div className="contenido-selector-color">
           {["rojo", "amarillo", "verde", "azul"].map((color) => (
-            <button key={color} className={color} onClick={() => seleccionarColor(color)}>
+            <button key={color} className={color} onClick={() => seleccionarColor(color, carta)}>
               {color.toUpperCase()}
             </button>
           ))}
@@ -145,6 +149,7 @@ function Juego({ playVictorySound, playDefeatSound }) {
         ) : (
           <>
             <div className="mano-computadora-container">
+              {colorActual && <h1 style={{ color: colorActual }}>Color Actual: {colorActual.toUpperCase()}</h1>}
               <h2></h2>
               {renderManoComputadora()}
             </div>
@@ -172,7 +177,7 @@ function Juego({ playVictorySound, playDefeatSound }) {
               </span>{" "}
             </button>
 
-            <ModalSelectorColor seleccionarColor={seleccionarColor} />
+            <ModalSelectorColor seleccionarColor={seleccionarColor} carta={carta} />
             <ModalInstrucciones />
           </>
         )}
