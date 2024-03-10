@@ -37,7 +37,7 @@ function Mano({ cartas, alJugarCarta }) {
                 <div className="uno-card-prohibido uno-card-prohibido-top-left"></div>
                 <div className="uno-card-prohibido uno-card-prohibido-bottom-right"></div>
               </React.Fragment>
-            ) : carta.valor === "comodin" ? (
+            ) : carta.valor === "comodin" || carta.valor === "+4" ? (
               <div className="uno-card-comodin-simbolo"></div>
             ) : carta.valor === "reversa" ? (
               <React.Fragment>
