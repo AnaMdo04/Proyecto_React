@@ -63,7 +63,11 @@ function Juego() {
       <div className="modal-selector-color">
         <div className="contenido-selector-color">
           {["rojo", "amarillo", "verde", "azul"].map((color) => (
-            <button key={color} style={{ backgroundColor: color }} onClick={() => seleccionarColor(color)}>
+            <button
+              key={color}
+              className={color} // Usa className para aplicar la clase correspondiente
+              onClick={() => seleccionarColor(color)}
+            >
               {color.toUpperCase()}
             </button>
           ))}
