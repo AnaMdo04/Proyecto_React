@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Mano from "./Mano";
 import useGameLogic from "../useGameLogic";
 import "../index.css";
+import imagenDecirUno from "../img/logo.png";
 
 function CartaRobar({ onClick, jugable }) {
   return (
@@ -63,11 +64,7 @@ function Juego() {
       <div className="modal-selector-color">
         <div className="contenido-selector-color">
           {["rojo", "amarillo", "verde", "azul"].map((color) => (
-            <button
-              key={color}
-              className={color} // Usa className para aplicar la clase correspondiente
-              onClick={() => seleccionarColor(color)}
-            >
+            <button key={color} className={color} onClick={() => seleccionarColor(color)}>
               {color.toUpperCase()}
             </button>
           ))}
@@ -147,7 +144,12 @@ function Juego() {
                 <div className="mano-jugador-container">
                   {renderManoJugador()}
                   {robarCartaVisible && !jugadorDijoUno && (
-                    <button onClick={() => setJugadorDijoUno(true)}>Decir UNO</button>
+                    <img
+                      src={imagenDecirUno}
+                      alt="Decir UNO"
+                      className="imagen-decir-uno"
+                      onClick={() => setJugadorDijoUno(true)}
+                    />
                   )}
                 </div>
               </>
