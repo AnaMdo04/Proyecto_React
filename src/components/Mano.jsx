@@ -1,6 +1,6 @@
 import React from "react";
 
-function Mano({ cartas, alJugarCarta }) {
+function Mano({ cartas, alJugarCarta, jugador, tipo }) {
   const determinarClaseEspecial = (carta) => {
     if (["+2", "reversa", "prohibido", "comodin", "+4"].includes(carta.valor)) {
       let claseEspecial = "especial";
@@ -14,12 +14,30 @@ function Mano({ cartas, alJugarCarta }) {
     return "";
   };
 
+  const determinarClaseJugador = (carta, index) => {
+    if (tipo === "pila-descarte") {
+      return "jugador";
+    }
+    if (index === cartas.length - 1 && jugador === "jugador" && tipo === "mano") {
+      return "jugador";
+    }
+    return jugador === "jugador" ? "jugador" : "computadora";
+  };
+
+  const determinarClaseCarta = (carta, index) => {
+    const claseJugador = determinarClaseJugador(carta, index);
+    return claseJugador === "computadora" ? "uno-card-middle-circle-computadora" : "";
+  };
+
   return (
-    <div className="mano">
+    <div className={`mano ${jugador}`}>
       {cartas.map((carta, index) => (
         <div
           key={index}
-          className={`carta ${carta.color} ${determinarClaseEspecial(carta)}`}
+          className={`carta ${carta.color} ${determinarClaseEspecial(carta)} ${determinarClaseJugador(
+            carta,
+            index
+          )} ${determinarClaseCarta(carta, index)}`}
           onClick={() => alJugarCarta(carta)}
         >
           {!["comodin", "reversa"].includes(carta.valor) && (
