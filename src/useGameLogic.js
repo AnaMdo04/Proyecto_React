@@ -6,6 +6,7 @@ function useGameLogic() {
   const [manoComputadora, setManoComputadora] = useState([]);
   const [pilaDescarte, setPilaDescarte] = useState([]);
   const [turno, setTurno] = useState("jugador");
+  const [saltoDeTurno, setSaltoDeTurno] = useState(false);
   const [direccionJuego, setDireccionJuego] = useState(1);
   const [colorActual, setColorActual] = useState("");
   const [mostrarModalSelectorColor, setMostrarModalSelectorColor] = useState(false);
@@ -66,11 +67,18 @@ function useGameLogic() {
 
   const jugarTurnoComputadora = () => {
     if (turno === "computadora" && !juegoTerminado) {
-      const cartaJugada = manoComputadora.find((carta) => esCartaJugable(carta));
-      if (cartaJugada) {
-        jugarCarta(cartaJugada, "computadora");
+      if (saltoDeTurno) {
+        // Si se debe saltar el turno de la computadora, simplemente cambia al siguiente turno
+        setSaltoDeTurno(false); // Desactiva el salto de turno
+        cambiarTurno(); // Cambia al siguiente turno
       } else {
-        robarCartas(1, "computadora");
+        // La lógica existente para que la computadora juegue su turno
+        const cartaJugada = manoComputadora.find((carta) => esCartaJugable(carta));
+        if (cartaJugada) {
+          jugarCarta(cartaJugada, "computadora");
+        } else {
+          robarCartas(1, "computadora");
+        }
       }
     }
   };
@@ -122,7 +130,15 @@ function useGameLogic() {
   };
 
   const cambiarTurno = () => {
-    setTurno(turno === "jugador" ? "computadora" : "jugador");
+    if (saltoDeTurno) {
+      // Avanzar dos veces el turno para saltar el turno del siguiente jugador
+      let siguienteTurno = turno === "jugador" ? "computadora" : "jugador"; // Esto es un ejemplo simple, ajusta según tu lógica de turnos
+      setTurno(siguienteTurno);
+      setSaltoDeTurno(false); // Resetear el salto de turno
+    } else {
+      // Avanzar el turno normalmente
+      setTurno(turno === "jugador" ? "computadora" : "jugador");
+    }
   };
 
   const verificarFinJuego = (mano, jugador) => {
@@ -145,11 +161,8 @@ function useGameLogic() {
   const aplicarEfectoCarta = (carta) => {
     switch (carta.valor) {
       case "prohibido":
-        cambiarTurno();
-        break;
       case "reversa":
-        setDireccionJuego(direccionJuego * -1);
-        cambiarTurno();
+        setSaltoDeTurno(true);
         break;
       case "+2":
         robarCartas(2, turno === "jugador" ? "computadora" : "jugador");
