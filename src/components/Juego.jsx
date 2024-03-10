@@ -28,6 +28,7 @@ function Juego() {
     seleccionarColor,
     esCartaJugable,
     setJugadorDijoUno,
+    ganador,
   } = useGameLogic();
 
   const [robarCartaVisible, setRobarCartaVisible] = useState(false);
@@ -126,10 +127,12 @@ function Juego() {
     <div className="center-container">
       <div className="App">
         {juegoTerminado ? (
-          <>
-            <h2>Juego Terminado. ¡{turno} gana!</h2>
-            <button onClick={inicializarJuego}>Reiniciar Juego</button>
-          </>
+          <div className="game-over-screen">
+            <h2 className="game-over-text">Juego Terminado. ¡{ganador} gana!</h2>
+            <button className="restart-button" onClick={inicializarJuego}>
+              Reiniciar Juego
+            </button>
+          </div>
         ) : (
           <>
             <div className="mano-computadora-container">

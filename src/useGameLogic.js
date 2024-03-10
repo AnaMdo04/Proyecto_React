@@ -13,6 +13,7 @@ function useGameLogic() {
   const [juegoTerminado, setJuegoTerminado] = useState(false);
   const [jugadorDijoUno, setJugadorDijoUno] = useState(false);
   const [computadoraDijoUno, setComputadoraDijoUno] = useState(false);
+  const [ganador, setGanador] = useState(null);
 
   const generarMazo = () => {
     const colores = ["rojo", "amarillo", "verde", "azul"];
@@ -144,7 +145,7 @@ function useGameLogic() {
   const verificarFinJuego = (mano, jugador) => {
     if (mano.length === 0) {
       setJuegoTerminado(true);
-      alert(`${jugador} gana!`);
+      setGanador(jugador);
     }
   };
 
@@ -209,6 +210,7 @@ function useGameLogic() {
     cambiarTurno,
     seleccionarColor,
     setJugadorDijoUno,
+    ganador,
   };
 }
 
