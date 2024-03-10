@@ -694,3 +694,11 @@ button.azul:hover {
 .hidden {
   display: none;
 }
+
+.carta.computadora .uno-card-small-number-bottom-right {
+  display: none;
+}
+
+.carta.computadora .uno-card-small-number {
+  display: none;
+}
