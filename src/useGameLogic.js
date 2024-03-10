@@ -114,15 +114,6 @@ function useGameLogic() {
         const nuevaMano = manoJugador.filter((c) => c !== carta);
         setManoJugador(nuevaMano);
         verificarFinJuego(nuevaMano, "jugador");
-        // Verificar si el jugador tiene solo una carta en la mano y no ha dicho "UNO"
-        if (nuevaMano.length === 1 && !jugadorDijoUno) {
-          // Penalizar al jugador por no decir "UNO" antes de jugar su última carta
-          robarCartas(2, "jugador");
-          // Reiniciar el estado de "UNO" para el jugador
-          setJugadorDijoUno(false);
-          // Salir de la función para evitar que el turno cambie
-          return;
-        }
       } else {
         const nuevaMano = manoComputadora.filter((c) => c !== carta);
         setManoComputadora(nuevaMano);
