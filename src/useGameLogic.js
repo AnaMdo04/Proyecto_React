@@ -47,7 +47,9 @@ function useGameLogic() {
 
   const inicializarJuego = useCallback(() => {
     let nuevoMazo = generarMazo();
-    nuevoMazo = barajarMazo(nuevoMazo);
+    do {
+      nuevoMazo = barajarMazo(nuevoMazo);
+    } while (nuevoMazo[14].color === "negro");
     const manoInicialJugador = nuevoMazo.slice(0, 7);
     const manoInicialComputadora = nuevoMazo.slice(7, 14);
     const nuevaPilaDescarte = [nuevoMazo[14]];
@@ -131,15 +133,7 @@ function useGameLogic() {
   };
 
   const cambiarTurno = () => {
-    if (saltoDeTurno) {
-      // Avanzar dos veces el turno para saltar el turno del siguiente jugador
-      let siguienteTurno = turno === "jugador" ? "computadora" : "jugador"; // Esto es un ejemplo simple, ajusta según tu lógica de turnos
-      setTurno(siguienteTurno);
-      setSaltoDeTurno(false); // Resetear el salto de turno
-    } else {
-      // Avanzar el turno normalmente
-      setTurno(turno === "jugador" ? "computadora" : "jugador");
-    }
+    setTurno(turno === "jugador" ? "computadora" : "jugador");
   };
 
   const verificarFinJuego = (mano, jugador) => {
@@ -172,17 +166,16 @@ function useGameLogic() {
       case "comodin":
       case "+4":
         if (turno === "computadora") {
-          const coloresEnManoComputadora = Array.from(new Set(manoComputadora.map((carta) => carta.color)));
+          const coloresEnManoComputadora = Array.from(new Set(manoComputadora.map((carta) => carta.color))).filter(
+            (color) => color !== "negro"
+          );
           const colorElegido = coloresEnManoComputadora[Math.floor(Math.random() * coloresEnManoComputadora.length)];
           setColorActual(colorElegido);
-          if (carta.valor === "+4") {
+          if (carta.valor !== "+4") {
             robarCartas(4, turno === "jugador" ? "computadora" : "jugador");
           }
         } else {
           setMostrarModalSelectorColor(true);
-          if (carta.valor === "+4") {
-            robarCartas(4, turno === "jugador" ? "computadora" : "jugador");
-          }
         }
         break;
       default:
