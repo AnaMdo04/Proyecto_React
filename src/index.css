@@ -126,12 +126,6 @@ a {
   flex-wrap: wrap;
   justify-content: center;
 }
-
-.carta.comodin,
-.carta.masCuatro {
-  background: linear-gradient(145deg, #9e9e9e, #757575);
-}
-
 .carta .especial {
   color: #fff;
   font-size: 18px;
@@ -595,4 +589,15 @@ button.azul:hover {
   right: -62.5px;
   bottom: 1.5px;
   transform: rotate(20deg);
+}
+
+.uno-card-comodin-simbolo {
+  background: conic-gradient(#ffff55 0% 25%, #ff5555 25% 50%, #5555ff 50% 75%, #55ff55 75% 100%);
+  width: 70px;
+  height: 150px;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
