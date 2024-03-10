@@ -533,3 +533,43 @@ button.azul:hover {
 .restart-button:active {
   transform: scale(0.95);
 }
+
+.uno-card-reversa-simbolo {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 8px solid currentColor;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
+}
+
+.uno-card-reversa-simbolo::before,
+.uno-card-reversa-simbolo::after {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-right: 5px solid currentColor;
+  border-top: 5px solid currentColor;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+  z-index: 3;
+}
+
+.uno-card-reversa-simbolo::before {
+  transform: rotate(-100deg);
+  right: -4px;
+  top: -4px;
+}
+
+.uno-card-reversa-simbolo::after {
+  transform: rotate(100deg);
+  left: -4px;
+  bottom: -4px;
+}
