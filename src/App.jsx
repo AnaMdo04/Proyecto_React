@@ -18,6 +18,7 @@ function App() {
   const defeatSoundAudio = useRef(new Audio(defeatSound));
 
   audioRef.current.volume = 0.1;
+  audioRef.current.loop = true;
 
   useEffect(() => {
     if (isPlaying) {
