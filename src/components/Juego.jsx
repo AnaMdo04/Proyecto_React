@@ -56,10 +56,12 @@ function Juego({ playVictorySound, playDefeatSound }) {
   };
 
   const renderManoJugador = (colorActual) => (
-    <Mano cartas={manoJugador} alJugarCarta={(carta) => jugarCarta(carta, "jugador")} colorActual={colorActual} />
+    <Mano cartas={manoJugador} alJugarCarta={(carta) => jugarCarta(carta, "jugador")} jugador="jugador" tipo="mano" />
   );
 
-  const renderManoComputadora = () => <Mano cartas={manoComputadora} alJugarCarta={() => {}} />;
+  const renderManoComputadora = () => (
+    <Mano cartas={manoComputadora} alJugarCarta={() => {}} jugador="computadora" tipo="mano" />
+  );
 
   const renderPilaDescarte = () => {
     return pilaDescarte.length > 0 ? (
@@ -68,7 +70,12 @@ function Juego({ playVictorySound, playDefeatSound }) {
           <CartaRobar onClick={() => robarCartas(1, "jugador")} jugable={robarCartaVisible} />
         </div>
         <div className="mano-computadora-container">
-          <Mano cartas={[pilaDescarte[pilaDescarte.length - 1]]} alJugarCarta={() => {}} />
+          <Mano
+            cartas={[pilaDescarte[pilaDescarte.length - 1]]}
+            alJugarCarta={() => {}}
+            jugador="computadora"
+            tipo="pila-descarte"
+          />
         </div>
       </div>
     ) : null;
@@ -161,7 +168,7 @@ function Juego({ playVictorySound, playDefeatSound }) {
               <>
                 <h2></h2>
                 <div className="mano-jugador-container">
-                  {renderManoJugador()}
+                  {renderManoJugador(colorActual)}
                   {robarCartaVisible && !jugadorDijoUno && (
                     <img
                       src={imagenDecirUno}
